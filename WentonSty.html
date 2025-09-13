@@ -1,0 +1,649 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wenton Coder 💻</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .video-background video {
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+    
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(21, 31, 40, 0.85);
+    }
+    
+    @property --a {
+      syntax: "<angle>";
+      inherits: false;
+      initial-value: 0deg;
+    }
+    
+    .box {
+      position: relative;
+      width: 400px;
+      height: 200px;
+      background: repeating-conic-gradient(
+        from var(--a),
+        #ff2770 0%,
+        #ff2770 5%,
+        transparent 5%,
+        transparent 40%,
+        #ff2770 50%
+      );
+      filter: drop-shadow(0 15px 50px #000);
+      border-radius: 20px;
+      animation: rotating 4s linear infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.5s;
+    }
+    
+    @keyframes rotating {
+      0% {
+        --a: 0deg;
+      }
+      100% {
+        --a: 360deg;
+      }
+    }
+    
+    .box::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: repeating-conic-gradient(
+        from var(--a),
+        #45f3ff 0%,
+        #45f3ff 5%,
+        transparent 5%,
+        transparent 40%,
+        #45f3ff 50%
+      );
+      filter: drop-shadow(0 15px 50px #000);
+      border-radius: 20px;
+      animation: rotating 4s linear infinite;
+      animation-delay: -1s;
+    }
+    
+    .box::after {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      background: #2d2d39;
+      border-radius: 15px;
+      border: 8px solid #25252b;
+    }
+    
+    .box:hover {
+      width: 450px;
+      height: 500px;
+    }
+    
+    .box:hover .login {
+      inset: 40px;
+    }
+    
+    .box:hover .loginBx {
+      transform: translateY(0px);
+    }
+    
+    .login {
+      position: absolute;
+      inset: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.2);
+      color: #fff;
+      z-index: 1000;
+      box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.5);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+      transition: 0.5s;
+      overflow: hidden;
+    }
+    
+    .loginBx {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+      width: 70%;
+      transform: translateY(126px);
+      transition: 0.5s;
+    }
+    
+    h2 {
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-align: center;
+    }
+    
+    h2 i {
+      color: #ff2770;
+      text-shadow: 0 0 5px #ff2770, 0 0 20px #ff2770;
+    }
+    
+    input {
+      width: 100%;
+      padding: 10px 20px;
+      outline: none;
+      border: none;
+      font-size: 1em;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.1);
+      border: 2px solid #fff;
+      border-radius: 30px;
+    }
+    
+    input::placeholder {
+      color: #999;
+    }
+    
+    input[type="submit"] {
+      background: #45f3ff;
+      border: none;
+      font-weight: 500;
+      color: #111;
+      cursor: pointer;
+      transition: 0.5s;
+    }
+    
+    input[type="submit"]:hover {
+      box-shadow: 0 0 10px #45f3ff, 0 0 60px #45f3ff;
+    }
+    
+    .group {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .group a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9em;
+    }
+    
+    .group a:nth-child(2) {
+      color: #ff2770;
+      font-weight: 600;
+    }
+    
+    .error-message {
+      color: #ff2770;
+      font-size: 0.9em;
+      margin-top: -15px;
+      display: none;
+    }
+    
+    .success-message {
+      color: #45f3ff;
+      font-size: 1em;
+      margin-top: 10px;
+      display: none;
+    }
+    
+    .social-icons {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 15px;
+      z-index: 1001;
+    }
+    
+    .social-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .music-btn {
+      background: rgba(255, 39, 112, 0.8);
+      box-shadow: 0 0 10px rgba(255, 39, 112, 0.5);
+    }
+    
+    .spotify-btn {
+      background: rgba(29, 185, 84, 0.8);
+      box-shadow: 0 0 10px rgba(29, 185, 84, 0.5);
+    }
+    
+    .instagram-btn {
+      background: rgba(225, 48, 108, 0.8);
+      box-shadow: 0 0 10px rgba(225, 48, 108, 0.5);
+    }
+    
+    .telegram-btn {
+      background: rgba(0, 136, 204, 0.8);
+      box-shadow: 0 0 10px rgba(0, 136, 204, 0.5);
+    }
+    
+    .social-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    .music-btn.playing {
+      animation: pulse 1.5s infinite;
+      background: rgba(69, 243, 255, 0.8);
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(69, 243, 255, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(69, 243, 255, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(69, 243, 255, 0);
+      }
+    }
+    
+    .request-section {
+      margin-top: 20px;
+      text-align: center;
+    }
+    
+    .request-btn {
+      padding: 10px 20px;
+      background: linear-gradient(45deg, #ff2770, #45f3ff);
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.5s;
+      box-shadow: 0 0 15px rgba(255, 39, 112, 0.5);
+    }
+    
+    .request-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(69, 243, 255, 0.7);
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modal-content {
+      background: #002200;
+      padding: 30px;
+      border-radius: 15px;
+      width: 400px;
+      max-width: 90%;
+      box-shadow: 0 0 25px #00ff00;
+      position: relative;
+      border: 2px solid #00ff00;
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      color: #00ff00;
+      cursor: pointer;
+    }
+    
+    .modal-title {
+      color: #00ff00;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px #00ff00;
+    }
+    
+    .modal-input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      background: #001100;
+      border: 1px solid #00ff00;
+      border-radius: 5px;
+      color: #00ff00;
+      font-family: monospace;
+    }
+    
+    .modal-input::placeholder {
+      color: #009900;
+    }
+    
+    .modal-submit {
+      width: 100%;
+      padding: 12px;
+      background: #00cc00;
+      color: #001100;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .modal-submit:hover {
+      background: #00ff00;
+      box-shadow: 0 0 15px #00ff00;
+    }
+    
+    #matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <div class="video-background">
+    <video autoplay muted loop id="bgVideo">
+      
+      <source src="https://tikcdn.io/ssstik/7509111604026379528?st=oepbXOOd2vqA27lSgZOrgw&e=1757795680" type="video/mp4">
+      Tarayıcınız video elementini desteklemiyor.
+    </video>
+    <div class="video-overlay"></div>
+  </div>
+
+  <canvas id="matrixCanvas"></canvas>
+
+  <div class="social-icons">
+    <div class="social-btn music-btn" id="musicBtn">
+      <i class="fas fa-music"></i>
+    </div>
+    <div class="social-btn spotify-btn" id="spotifyBtn">
+      <i class="fab fa-spotify"></i>
+    </div>
+    <div class="social-btn instagram-btn" id="instagramBtn">
+      <i class="fab fa-instagram"></i>
+    </div>
+    <div class="social-btn telegram-btn" id="telegramBtn">
+      <i class="fab fa-telegram"></i>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="login">
+      <div class="loginBx">
+        <h2>
+          <i class="fa-solid fa-right-to-bracket"></i>
+          Wenton Girişi
+          <i class="fa-solid fa-heart"></i>
+        </h2>
+        <form id="loginForm">
+          <input type="text" id="username" placeholder="Username" autocomplete="off">
+          <input type="password" id="password" placeholder="Password">
+          <input type="submit" value="Sign in" />
+          <p class="error-message" id="errorMessage">Altta Şifre veKullanıcı adı var.</p>
+          <p class="success-message" id="successMessage"Hoşgeldin Wentonun Misafiri Wenton Bio Sitesime Yönlendiriliyorsun🇹🇷...</p>
+        </form>
+        <div class="group">
+          <a href="#">Username : wenton</a>
+          <a href="#">Password : wenton</a>
+        </div>
+        
+        <div class="request-section">
+          <button class="request-btn" id="requestBtn"İstek"</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="requestModal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <h2 class="modal-title">Proje İstek ☄️</h2>
+      <input type="text" class="modal-input" id="requestInput" placeholder="İsteğinizi veya projenizi yazın...">
+      <button class="modal-submit" id="submitRequest">Gönder</button>
+    </div>
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="wentonlogin.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const musicBtn = document.getElementById('musicBtn');
+      const bgMusic = document.getElementById('bgMusic');
+      const spotifyBtn = document.getElementById('spotifyBtn');
+      const instagramBtn = document.getElementById('instagramBtn');
+      const telegramBtn = document.getElementById('telegramBtn');
+      const requestBtn = document.getElementById('requestBtn');
+      const requestModal = document.getElementById('requestModal');
+      const closeModal = document.getElementById('closeModal');
+      const submitRequest = document.getElementById('submitRequest');
+      const requestInput = document.getElementById('requestInput');
+      const loginForm = document.getElementById('loginForm');
+      const matrixCanvas = document.getElementById('matrixCanvas');
+      const bgVideo = document.getElementById('bgVideo');
+      
+      let isPlaying = false;
+      let matrixInterval;
+
+      // Video yükleme hatası durumunda
+      bgVideo.addEventListener('error', function() {
+        console.error("Video yüklenirken hata oluştu. Lütfen video dosyasının yolunu kontrol edin.");
+      });
+
+      canvasSize();
+      function canvasSize() {
+        matrixCanvas.width = window.innerWidth;
+        matrixCanvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', canvasSize);
+
+      function sendIPToTelegram() {
+        fetch('https://api.ipify.org?format=json')
+          .then(response => response.json())
+          .then(data => {
+            const ip = data.ip;
+            const token = '8492942841:AAFwG6MePln-hJqBzKKowvXfBgBZCs6Pkoo';
+            const chatId = '7705380171';
+            const message = `🥷  IP: ${ip}`;
+            
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${message}`)
+              .catch(error => console.error('IP gönderilemedi:', error));
+          })
+          .catch(error => console.error('IP alınamadı:', error));
+      }
+
+      sendIPToTelegram();
+
+      musicBtn.addEventListener('click', function() {
+        if (isPlaying) {
+          bgMusic.pause();
+          musicBtn.classList.remove('playing');
+          musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+        } else {
+          bgMusic.play().catch(e => {
+            console.log("Knk Wenton ile İletişime Geç.");
+          });
+          musicBtn.classList.add('playing');
+          musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        }
+        isPlaying = !isPlaying;
+      });
+
+      spotifyBtn.addEventListener('click', function() {
+        window.open('https://open.spotify.com/playlist/1IeppbJIXrwNT8B25ZYcco?si=8sWImBvgSfKG2pdP2CP2Dw&pi=4i0MMT3TR7SMC', '_blank');
+      });
+
+      instagramBtn.addEventListener('click', function() {
+        window.open('https://www.instagram.com/wenton_php?igsh=MWZ2N2VhODE1MDd1dQ==', '_blank');
+      });
+
+      telegramBtn.addEventListener('click', function() {
+        window.open('https://t.me/wentonss1', '_blank');
+      });
+
+      requestBtn.addEventListener('click', function() {
+        requestModal.style.display = 'flex';
+        startMatrixEffect();
+      });
+
+      closeModal.addEventListener('click', function() {
+        requestModal.style.display = 'none';
+        stopMatrixEffect();
+      });
+
+      submitRequest.addEventListener('click', function() {
+        const requestText = requestInput.value.trim();
+        if (requestText) {
+          const token = '8388224476:AAFwkgFME2paQbMIQ-1sD16qkx003RL89BM';
+          const chatId = '7705380171';
+          const message = `İstek/Proje: ${requestText}`;
+          
+          fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
+            .then(() => {
+              alert('Olmadı kanka ilerde düzeltilecek bu hata 🙂');
+              requestInput.value = '';
+              requestModal.style.display = 'none';
+              stopMatrixEffect();
+            })
+            .catch(error => {
+              console.error('İstek gönderilemedi:', error);
+              alert('Bir hata oluştu, lütfen tekrar deneyin 💯');
+            });
+        } else {
+          alert('İsteğini Girebilirsin...');
+        }
+      });
+
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        
+        if (username === 'wenton' && password === 'wenton') {
+          errorMessage.style.display = 'none';
+          successMessage.style.display = 'block';
+          
+          setTimeout(function() {
+            window.location.href = 'https://wenton.xo.je/?i=2';
+          }, 2000);
+        } else {
+          errorMessage.style.display = 'block';
+          successMessage.style.display = 'none';
+        }
+      });
+
+      function startMatrixEffect() {
+        const ctx = matrixCanvas.getContext('2d');
+        const characters = "01";
+        const fontSize = 14;
+        const columns = matrixCanvas.width / fontSize;
+        const drops = [];
+        
+        for(let i = 0; i < columns; i++) {
+          drops[i] = 1;
+        }
+        
+        function draw() {
+          ctx.fillStyle = "rgba(0, 10, 0, 0.05)";
+          ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+          
+          ctx.fillStyle = "#0F0";
+          ctx.font = `${fontSize}px monospace`;
+          
+          for(let i = 0; i < drops.length; i++) {
+            const text = characters.charAt(Math.floor(Math.random() * characters.length));
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            
+            if(drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+              drops[i] = 0;
+            }
+            
+            drops[i]++;
+          }
+        }
+        
+        matrixInterval = setInterval(draw, 33);
+      }
+      
+      function stopMatrixEffect() {
+        clearInterval(matrixInterval);
+        const ctx = matrixCanvas.getContext('2d');
+        ctx.clearRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+      }
+
+      document.addEventListener('click', function() {
+        if (bgMusic.paused) {
+          bgMusic.play().then(() => {
+            bgMusic.pause();
+            isPlaying = false;
+            musicBtn.classList.remove('playing');
+            musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+          }).catch(e => {});
+        }
+      }, { once: true });
+    });
+  </script>
+</body>
+</html>
