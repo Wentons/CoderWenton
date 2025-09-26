@@ -402,7 +402,7 @@
   <div class="video-background">
     <video autoplay muted loop id="bgVideo">
       
-      <source src="https://tikcdn.io/ssstik/7509111604026379528?st=oepbXOOd2vqA27lSgZOrgw&e=1757795680" type="video/mp4">
+      <source src="https://tikcdn.io/ssstik/7240884265037221126?st=SytEtYo0g4smE-G8hvN_8w&e=1758932898" type="video/mp4">
       Tarayıcınız video elementini desteklemiyor.
     </video>
     <div class="video-overlay"></div>
@@ -446,7 +446,7 @@
         </div>
         
         <div class="request-section">
-          <button class="request-btn" id="requestBtn"İstek"</button>
+          <button class="request-btn" id="requestBtn"Mesaj"</button>
         </div>
       </div>
     </div>
@@ -455,8 +455,8 @@
   <div class="modal" id="requestModal">
     <div class="modal-content">
       <span class="close-btn" id="closeModal">&times;</span>
-      <h2 class="modal-title">Proje İstek ☄️</h2>
-      <input type="text" class="modal-input" id="requestInput" placeholder="İsteğinizi veya projenizi yazın...">
+      <h2 class="modal-title">Mesaj</h2>
+      <input type="text" class="modal-input" id="requestInput" placeholder="Wentona Mesaj Gönder">
       <button class="modal-submit" id="submitRequest">Gönder</button>
     </div>
   </div>
@@ -533,7 +533,7 @@
       });
 
       instagramBtn.addEventListener('click', function() {
-        window.open('https://www.instagram.com/wenton_php?igsh=MWZ2N2VhODE1MDd1dQ==', '_blank');
+        window.open('https://www.instagram.com/wenton_coder?igsh=eXJ5eWVhOGVvcHVk', ' _blank');
       });
 
       telegramBtn.addEventListener('click', function() {
@@ -559,7 +559,7 @@
           
           fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
             .then(() => {
-              alert('Olmadı kanka ilerde düzeltilecek bu hata 🙂');
+              alert('Başarılı 🇹🇷');
               requestInput.value = '';
               requestModal.style.display = 'none';
               stopMatrixEffect();
@@ -569,7 +569,7 @@
               alert('Bir hata oluştu, lütfen tekrar deneyin 💯');
             });
         } else {
-          alert('İsteğini Girebilirsin...');
+          alert('Mesajını girebilirsiniz...');
         }
       });
 
